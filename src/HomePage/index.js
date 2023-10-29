@@ -2,12 +2,15 @@ import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import {useEffect,useState} from "react"
 
+
 const API_KEY = "AIzaSyCUVdzk_i0PG4VBLwFQFxn8S3xMd-1xu70"
-const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=25.019961231608928,121.45529784290277&radius=1000&keyword=鴨肉飯&language=zh-TW&key=' + API_KEY
+
+var location;
 
 const HomePage = () =>{
     const [data,setData] = useState({});
     const [selectedItem, setSelectedItem] = useState([]);
+    const [url,setUrl] = useState({});
 
     const fetchData =  ()=>{
         fetch(url)
@@ -24,24 +27,19 @@ const HomePage = () =>{
         })
         
     }
-    const fetchCoor =  ()=>{
-        fetch("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCUVdzk_i0PG4VBLwFQFxn8S3xMd-1xu70")
-        .then(response => {
-            
-            if (response.ok)  return response.json();
-            throw response;
-        })
-        .then(json => {
-            
-            console.log(json)
-        })
-        
+    const GetUrl = () => {navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+        location = position.coords.latitude + ',' + position.coords.longitude
+        const url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location +'&radius=1000&keyword=牛排&language=zh-TW&key=' + API_KEY
+        setUrl(url)
+    });
     }
-    
-    useEffect(()=>{
-        
+
+    useEffect(()=>{ 
+        GetUrl()
         fetchData()
-    },[])
+    },[location])
     
     return <div className="container" >
         

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+<script crossorigin src="..."></script>
 function App() {
   return (
     <div className="App">
