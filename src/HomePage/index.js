@@ -1,9 +1,13 @@
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import {useEffect,useState} from "react"
+
+import {useEffect,useState,useRef} from "react"
 
 
 const API_KEY = "AIzaSyCUVdzk_i0PG4VBLwFQFxn8S3xMd-1xu70"
+const origin = {lat:25.0196468 , lng : 121.4134637}
+const destination = {lat: 25.026144, lng: 121.419915}
+const google = window.google;
 
 var location;
 
@@ -11,7 +15,29 @@ const HomePage = () =>{
     const [data,setData] = useState({});
     const [selectedItem, setSelectedItem] = useState([]);
     const [url,setUrl] = useState({});
-
+    const [position,setPosition] = useState({});
+    const RenderMap = () =>{
+        const directionsService = new google.maps.DirectionsService();
+        let request = {
+            origin: origin,
+            destination: destination,
+            travelMode: 'WALKING'
+        };
+        directionsService.route(request, function(response, status) {
+            
+            if (status == 'OK') {
+                let directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: {
+                        center: { lat: 41.85, lng: -87.65 },
+                        zoom: 8
+                    },
+                    directions: response,
+                });
+            }
+        });
+    }
+    
+    
     const fetchData =  ()=>{
         fetch(url)
         .then(response => {
@@ -35,15 +61,17 @@ const HomePage = () =>{
         setUrl(url)
     });
     }
-
+   
     useEffect(()=>{ 
         GetUrl()
         fetchData()
+        RenderMap()
+    
     },[location])
     
     return <div className="container" >
         
     </div>
 }
-export default HomePage;
 
+export default HomePage;
