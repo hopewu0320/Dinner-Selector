@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-
+import MapContainer from "./components/map";
 import {useEffect,useState,useRef} from "react"
 
 
@@ -63,14 +63,14 @@ const HomePage = () =>{
     }
    
     useEffect(()=>{ 
-        GetUrl()
+        
         fetchData()
-        RenderMap()
+        
     
     },[location])
     
     return <div className="container" >
-        
+        <MapContainer />
     </div>
 }
 
