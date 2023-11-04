@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import MapContainer from "./components/map";
+
 import {useEffect,useState,useRef} from "react"
 
 
@@ -16,26 +17,9 @@ const HomePage = () =>{
     const [selectedItem, setSelectedItem] = useState([]);
     const [url,setUrl] = useState({});
     const [position,setPosition] = useState({});
-    const RenderMap = () =>{
-        const directionsService = new google.maps.DirectionsService();
-        let request = {
-            origin: origin,
-            destination: destination,
-            travelMode: 'WALKING'
-        };
-        directionsService.route(request, function(response, status) {
-            
-            if (status == 'OK') {
-                let directionsDisplay = new google.maps.DirectionsRenderer({
-                    map: {
-                        center: { lat: 41.85, lng: -87.65 },
-                        zoom: 8
-                    },
-                    directions: response,
-                });
-            }
-        });
-    }
+    const [start,setStart] = useState({});
+    const [end,setEnd] = useState({});
+    
     
     
     const fetchData =  ()=>{
@@ -58,19 +42,23 @@ const HomePage = () =>{
         console.log("Longitude is :", position.coords.longitude);
         location = position.coords.latitude + ',' + position.coords.longitude
         const url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location +'&radius=1000&keyword=牛排&language=zh-TW&key=' + API_KEY
-        setUrl(url)
+        setUrl(url);
+        setStart({lat:position.coords.latitude,lng:position.coords.longitude});
     });
     }
    
     useEffect(()=>{ 
         
         fetchData()
+        GetUrl()
         
     
     },[location])
     
     return <div className="container" >
-        <MapContainer />
+        
+        <MapContainer start={start} />
+        
     </div>
 }
 
