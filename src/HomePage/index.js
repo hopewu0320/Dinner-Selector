@@ -34,17 +34,34 @@ const HomePage = () =>{
             setData(json);
             const places = json.results
             console.log(places);
-            
+            var idx = choose_shop(places.length)
+            //不能寫places[5]
+            if (places && places.length > idx) {
+                console.log("End:",places[idx].geometry.location);
+                setEnd(places[idx].geometry.location)
+            }
+            // places.forEach((place,i) => {
+            //     // 每個 'place' 對象應該有一個 'geometry' 屬性
+            //     const geometry = place.geometry.location;
+            //     // 現在你可以使用這些經緯度值
+            //     console.log(geometry,i);
+            // });
+            // var idx = choose_shop(places.length)
+            // setEnd(places[idx].geometry.location)
         })
-        
+    }
+    const choose_shop = (len) =>{
+        var idx = Math.floor((Math.random()*len)+1)
+        return idx;
     }
     const GetUrl = () => {navigator.geolocation.getCurrentPosition(function(position) {
         //console.log("Latitude is :", position.coords.latitude);
         //console.log("Longitude is :", position.coords.longitude);
         location = position.coords.latitude + ',' + position.coords.longitude
-        const url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location +'&radius=100000&keyword='+keyword+'&language=zh-TW&key=' + API_KEY
+        const url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location +'&radius=5000&keyword='+keyword+'&language=zh-TW&key=' + API_KEY
         setUrl(url);
         //console.log(url)
+        console.log("Start",{lat:position.coords.latitude,lng:position.coords.longitude})
         setStart({lat:position.coords.latitude,lng:position.coords.longitude}); //現在住家的位置
         
     });
@@ -66,7 +83,7 @@ const HomePage = () =>{
     
     return <div className="container" >
         
-        <MapContainer start={start} />
+        <MapContainer start={start}  end={end} />
         <Button ReceivedKeyword = {GetKeyword}/>
     </div>
 }

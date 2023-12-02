@@ -1,11 +1,12 @@
 import React, { useRef, useEffect,useState } from 'react';
 
-const MapContainer = ({start}) => {
+const MapContainer = ({start,end}) => {
+  console.log(end)
   const googleMapRef = useRef(null);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   let googleMap = null;
-  const end = { lat: 25.026144, lng: 121.419915 }; // 终点坐标
+  //const end = { lat: 25.026144, lng: 121.419915 }; // 终点坐标
 
   // 计算和显示路线
   const calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
