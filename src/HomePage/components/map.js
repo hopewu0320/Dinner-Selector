@@ -5,11 +5,12 @@ const MapContainer = ({start}) => {
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   let googleMap = null;
-  
+  const end = { lat: 25.026144, lng: 121.419915 }; // 终点坐标
+
   // 计算和显示路线
   const calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
     //const start = { lat: 25.0196468, lng: 121.4134637 }; // 起点坐标
-    const end = { lat: 25.026144, lng: 121.419915 }; // 终点坐标
+    
 
     directionsService.route(
       {
@@ -34,7 +35,7 @@ const MapContainer = ({start}) => {
   };
 
   const Show_Distance = ()=>{
-    const end = { lat: 25.026144, lng: 121.419915 }; // 终点坐标
+    
     const distanceMatrixService = new window.google.maps.DistanceMatrixService();
         distanceMatrixService.getDistanceMatrix({
           origins: [start],

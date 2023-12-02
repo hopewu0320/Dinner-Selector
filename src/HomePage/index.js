@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import MapContainer from "./components/map";
-
+import Button from "./components/Button";
 import {useEffect,useState,useRef} from "react"
 
 
@@ -58,7 +58,7 @@ const HomePage = () =>{
     return <div className="container" >
         
         <MapContainer start={start} />
-        
+        <Button />
     </div>
 }
 
