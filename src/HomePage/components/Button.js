@@ -14,7 +14,7 @@ var jsonData = {
     ]
   }
 
-const button = () =>{
+const button = ({ReceivedKeyword}) =>{
     
     const onClick = () => {
         fetch('http://localhost:8000/dinner-option/',{ //記得加上斜線
@@ -26,7 +26,8 @@ const button = () =>{
         })
         .then(response => response.json())
         .then(data => {
-            console.log("傳送data:",data)
+            console.log("回傳data:",data) //從後端處理過回傳的Data
+            ReceivedKeyword(data.data)
         })
         .catch(error =>{
             console.error('Error:',error);

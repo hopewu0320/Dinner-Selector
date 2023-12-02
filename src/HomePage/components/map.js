@@ -25,8 +25,7 @@ const MapContainer = ({start}) => {
         if (status === window.google.maps.DirectionsStatus.OK) {
           // 显示路线
           directionsRenderer.setDirections(response);
-          
-          console.log(response)
+        
         } else {
           window.alert('Directions request failed due to ' + status);
         }
