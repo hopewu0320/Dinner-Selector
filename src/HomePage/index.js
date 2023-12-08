@@ -50,7 +50,7 @@ const HomePage = () =>{
             // setEnd(places[idx].geometry.location)
         })
     }
-    const choose_shop = (len) =>{
+    const choose_shop = (len) =>{   //random choose shop
         var idx = Math.floor((Math.random()*len)+1)
         return idx;
     }
@@ -72,7 +72,7 @@ const HomePage = () =>{
         console.log("Selected dinner:",data)
     }
     
-    //Fix FetchData和GetUrl的url不同步的問題
+    //Fix FetchData和GetUrl的url不同步導致選取的晚餐不同的問題
     //因為keyword改變 所以url改變，url改變 所以所搜尋的店家改變
     useEffect(()=>{ 
         GetUrl()
