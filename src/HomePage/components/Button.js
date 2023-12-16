@@ -18,11 +18,11 @@ const button = ({ReceivedKeyword}) =>{
     
     const onClick = () => {
         fetch('http://localhost:8000/dinner-option/',{ //記得加上斜線
-            method:'POST',
+            method:'GET',
             headers:{
                 'Content-type': 'application/json',
             },
-            body:JSON.stringify(jsonData)
+            //body:JSON.stringify(jsonData)
         })
         .then(response => response.json())
         .then(data => {

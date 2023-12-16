@@ -1,30 +1,37 @@
-from bs4 import BeautifulSoup as Soup
-from selenium import webdriver
-# 獲取網頁原始碼
-url = "https://www.google.com/maps/place/%E7%89%9B%E8%82%89%E9%BA%B5%E8%88%98/@25.0155497,121.4159079,17z/data=!3m1!4b1!4m6!3m5!1s0x34681d9606a67625:0x673430f45a99a78!8m2!3d25.0155497!4d121.4159079!16s%2Fg%2F11f9wtt70q?hl=zh-TW&entry=ttu"
-driver = webdriver.Chrome()
-driver.get(url)
+# import pandas as pd
 
-soup = Soup(driver.page_source,"lxml")
-# 獲取評論資料框架
-all_reviews = soup.find_all(class_ = 'jftiEf fontBodyMedium')
-# 以第一則評論為例
-ar = all_reviews[1] # 第幾則評論
-print(all_reviews[1])
-# # 評論者名稱
-# reviewer_name = ar.find(class_ = "section-review-title").text
+# # 示例数据：食物、评分和权重
+# # data = {
+# #     'food': ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司'],
+# #     'rating': [4.5, 4.0, 4.1, 4.2, 4.7],  # 评分
+# #     'weight': [0.025, 0.9, 0.025, 0.025, 0.025]          # 权重
+# # }
+# # data = {
+# #     'food': ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司'],
+# #     'rating': [4.5, 4.0, 4.1, 4.2, 4.7],  # 评分
+# #     'weight': [0.3, 0.1, 0.05, 0.05, 0.5]          # 权重
+# # } #火鍋會贏
+# data = {
+#     'food': ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司'],
+#     'rating': [9, 6, 6, 2, 9],  # 评分
+#     'weight': [0.3, 0.1, 0.05, 0.05, 0.5]          # 权重
+# } #rating同分怎麼辦
 
+# df = pd.DataFrame(data)
 
-# # 評論者代稱＆評論數
-# subtitle_review = ar.find(class_ = "section-review-subtitle").text
+# # 计算加权评分
+# df['weighted_rating'] = df['rating'] * df['weight']
+# total_weight = df['weight'].sum()
+# weighted_score = df['weighted_rating'].sum() / total_weight
 
-# # 評論星數
-# star_review = str(ar.find(class_ = "section-review-stars").get('aria-label').strip().strip("顆星"))
+# # 显示加权评分结果
+# print(weighted_score)
 
-# # 評論時間
-# date_review = ar.find(class_ = "section-review-publish-date").text
-
-# # 評論內容
-text_review = ar.find(class_ = "MyEned").text
-print(text_review)
-driver.close()
+import random
+ 
+sampleList = ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司']
+for i in range(10):
+    randomList = random.choices(
+    sampleList,  weights=(0.52, 0.4, 0.4, 0.4, 0.52), k=5) # weights=(80, 30, 30, 30, 70) 0.8
+    
+    print(randomList)
