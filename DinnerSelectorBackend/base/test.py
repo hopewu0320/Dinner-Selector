@@ -27,11 +27,22 @@
 # # 显示加权评分结果
 # print(weighted_score)
 
-import random
+# import random
  
-sampleList = ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司']
-for i in range(10):
-    randomList = random.choices(
-    sampleList,  weights=(0.52, 0.4, 0.4, 0.4, 0.52), k=5) # weights=(80, 30, 30, 30, 70) 0.8
+# sampleList = ['火鍋', '鴨肉飯', '魯肉飯', '義大利麵', '壽司']
+# for i in range(10):
+#     randomList = random.choices(
+#     sampleList,  weights=(0.52, 0.4, 0.4, 0.4, 0.52), k=5) # weights=(80, 30, 30, 30, 70) 0.8
     
-    print(randomList)
+#     print(randomList)
+import pandas as pd
+
+# Creating a simple DataFrame with some random data
+data = {
+    'Name': ['John Doe', 'Jane Doe', 'Mary Johnson', 'Michael Smith'],
+    'Age': [28, 34, 24, 42],
+    'City': [['New York','Los Angeles'], 'Los Angeles', 'Chicago', 'Houston']
+}
+
+df = pd.DataFrame(data)
+print(df)
